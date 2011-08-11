@@ -1,5 +1,5 @@
-
 local commonCreateClass
+
 
 function Class(className, Base, env)
     env = env or _G
