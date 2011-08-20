@@ -25,9 +25,35 @@ function stringEx.join(list, sep)
 end
 
 
+function stringEx.ltrim(str)
+    return string.gsub(str, "^%s*", "")
+end
+
+
+function stringEx.rtrim(str)
+    return string.gsub(str, "%s*$", "")
+end
+
+
 function stringEx.trim(str)
-    local ret = string.gsub(str, "^%s*", "")
-    ret = string.gsub(ret, "%s*$", "")
+    return stringEx.rtrim(stringEx.ltrim(str))
+end
+
+
+function stringEx.gltrim(str, pattern)
+    return string.gsub(str, "^" .. pattern, "")
+end
+
+
+function stringEx.grtrim(str, pattern)
+    return string.gsub(str, pattern .. "$", "")
+end
+
+
+function stringEx.gtrim(str, patternLeft, patternRight)
+    patternRight = patternRight or patternLeft
+    local ret = stringEx.gltrim(str, patternLeft)
+    ret = stringEx.grtrim(ret, patternRight)
     return ret
 end
 
@@ -77,5 +103,28 @@ function stringEx.splitIterator(text, sep)
 
     return _f, text, ""
 end
+
+
+function stringEx.removeFirstN(n, str)
+    return string.sub(str, 1 + n)
+end
+
+
+function stringEx.removeFirst(str)
+    return stringEx.removeFirstN(1, str)
+end
+
+
+function stringEx.removeLastN(n, str)
+    return string.sub(str, 1, #str - n)
+end
+
+
+function stringEx.removeLast(str)
+    return stringEx.removeLastN(1, str)
+end
+
+
+
 
 return stringEx
