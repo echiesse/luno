@@ -2,8 +2,14 @@
 ioEx = {}
 
 function ioEx.getTextFromFile(fileName)
-    local file = io.open(fileName, "rt")
-    return file:read("*a")
+    local file, msg = io.open(fileName, "rt")
+    local ret
+    if file == nil then
+        ret = {nil, msg}
+    else
+        ret = {file:read("*a")}
+    end
+    return unpack(ret)
 end
 
 
