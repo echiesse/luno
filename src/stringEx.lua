@@ -68,6 +68,16 @@ function stringEx.endsWith(strTest, str)
 end
 
 
+function stringEx.splitWords(text)
+    return stringEx.split(text, "%s")
+end
+
+
+function stringEx.joinWords(words)
+    return stringEx.join(words, " ")
+end
+
+
 function stringEx.splitLines(text)
     return stringEx.split(text, "\r?\n")
 end

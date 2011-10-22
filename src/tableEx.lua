@@ -25,4 +25,22 @@ function tableEx.isEmpty(tb)
 end
 
 
+function tableEx.last(tb)
+    return tb[#tb]
+end
+
+
+function tableEx.find(tb, value, test)
+    local ret = {}
+
+    test = test or (function(a,b) return a==b end)
+
+    for i, v in pairs(tb) do
+        if test(v, value) then
+            table.insert(ret, {[i] = v})
+        end
+    end
+    return ret
+end
+
 return tableEx

@@ -175,7 +175,7 @@ function F.pipeR(...)
     elseif #funcs > 1 then
         local f = funcs[#funcs]
         table.remove(funcs)
-        return function(...) return f(F.pipe(funcs)(...)) end
+        return function(...) return f(F.pipeR(funcs)(...)) end
     else
         return nil
     end
