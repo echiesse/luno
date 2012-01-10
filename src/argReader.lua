@@ -1,4 +1,4 @@
-require"ecs/stringEx"
+require"luno.stringEx"
 
 --[[
 -- Exemplo de mapa de argumentos:
