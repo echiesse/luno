@@ -1,3 +1,8 @@
+-- *****************************************************************************
+-- Luno
+-- Copyright (c) 2011-2012 Eric Chiesse de Souza (www.echiesse.com.br)
+-- Read "License.txt" for the license terms
+-- *****************************************************************************
 
 -- Funções auxiliares:
 local function tbAppend(t1, t2)
@@ -18,6 +23,7 @@ local function copy(val)
         ret = {}
         for i, v in pairs(val) do
             ret[copy(i)] = copy(v)
+            setmetatable(ret, getmetatable(val))
         end
     else
         ret = val
@@ -143,6 +149,23 @@ end
 function F.compose(f1, f2)
     return function(...)
         return f1(f2(...))
+    end
+end
+
+
+function F.gcompose(...)
+    local funcs = {...}
+    if type(funcs[1]) == "table" then
+        funcs = funcs[1]
+    end
+
+    return function(...)
+        local ret = {...}
+        for i = #funcs, 1, -1 do
+            local f = funcs[i]
+            ret = {f(unpack(ret))}
+        end
+        return unpack(ret)
     end
 end
 
