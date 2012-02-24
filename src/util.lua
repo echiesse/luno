@@ -1,3 +1,10 @@
+-- *****************************************************************************
+-- Luno
+-- Copyright (c) 2011-2012 Eric Chiesse de Souza (www.echiesse.com.br)
+-- Read "License.txt" for the license terms
+-- *****************************************************************************
+
+
 --- Escolhe uma das duas opções conforme a condição seja verdadeira ou falsa.
 --  @param condition  Condição a ser avaliada.
 --  @param valueTrue  Valor a ser retornado caso a expressão seja verdadeira.
