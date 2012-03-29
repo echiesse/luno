@@ -34,6 +34,43 @@ end
 --##############################################################################
 F = {}
 
+--------------------------------------------------------------------------------
+-- Funções sobre listas:
+
+
+function F.head(list)
+    return list[1]
+end
+
+
+function F.tail(list)
+    local ret = {}
+    for i = 2, #list do
+        ret[i-1] = list[i]
+    end
+    return ret
+end
+
+
+function F.take(n, list)
+    local ret = {}
+    for i = 1, n do
+        ret[i] = list[i]
+    end
+    return ret
+end
+
+
+function F.drop(n, list)
+    local ret = {}
+    for i = n+1, #list do
+        table.insert(ret, list[i])
+    end
+    return ret
+end
+
+
+--------------------------------------------------------------------------------
 function F.any(f, list)
     local ret = false
     for i, v in ipairs(list) do
@@ -61,7 +98,7 @@ end
 function F.map(f, list)
     local ret = {}
     for i, v in ipairs(list) do
-        ret[i] = f(v)
+        ret[i] = f(v, i)
     end
     return ret
 end
@@ -70,7 +107,7 @@ end
 function F.gmap(f, list)
     local ret = {}
     for i, v in pairs(list) do
-        ret[i] = f(v)
+        ret[i] = f(v, i)
     end
     return ret
 end
@@ -91,7 +128,6 @@ end
 
 function F.gfilter(f, list)
     local ret = {}
-    local j = 1
     for i, v in pairs(list) do
         if f(v) == true then
             ret[i] = v
@@ -122,6 +158,12 @@ function F.reduce(f, list, iniVal)
 end
 
 
+function F.flip(f, a, b)
+    return f(b,a)
+end
+
+
+--------------------------------------------------------------------------------
 function F.partial(f, ...)
     local uArg = copy({...}) -- Evita efeitos colaterais
     return function(...) return f(unpack(tbAppend(uArg, {...}))) end
@@ -202,11 +244,6 @@ function F.pipeR(...)
     else
         return nil
     end
-end
-
-
-function F.flip(f, a, b)
-    return f(b,a)
 end
 
 
