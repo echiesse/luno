@@ -140,6 +140,20 @@ function stringEx.removeLast(str)
 end
 
 
+function stringEx.charAt(str, pos)
+    return string.sub(str, pos, pos)
+end
+
+
+function stringEx.lastChar(str, pos)
+    return string.sub(str, -1)
+end
+
+
+function stringEx.firstChar(str, pos)
+    return stringEx.charAt(str, 1)
+end
+
 
 
 return stringEx
