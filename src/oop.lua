@@ -25,7 +25,7 @@ function commonCreateClass(ClassTable, Base)
         local new = {}
         setmetatable(new, classObj)
         if classObj.init ~= nil then
-            classObj.init(new, unpack(arg))
+            classObj.init(new, ...)
         else
             classObj.init = function() end
         end
