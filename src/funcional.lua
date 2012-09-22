@@ -98,13 +98,31 @@ end
 function F.map(f, list)
     local ret = {}
     for i, v in ipairs(list) do
-        ret[i] = f(v, i)
+        ret[i] = f(v)
     end
     return ret
 end
 
 
 function F.gmap(f, list)
+    local ret = {}
+    for i, v in pairs(list) do
+        ret[i] = f(v)
+    end
+    return ret
+end
+
+
+function F.mapi(f, list)
+    local ret = {}
+    for i, v in ipairs(list) do
+        ret[i] = f(v, i)
+    end
+    return ret
+end
+
+
+function F.gmapi(f, list)
     local ret = {}
     for i, v in pairs(list) do
         ret[i] = f(v, i)
