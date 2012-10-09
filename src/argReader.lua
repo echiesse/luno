@@ -4,7 +4,10 @@
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
-require"luno.stringEx"
+require"luno.base"
+
+
+luno.argReader = {}
 
 --[[
 -- Exemplo de mapa de argumentos:
@@ -15,7 +18,7 @@ argMap =
 }
 --]]
 
-ARG_TYPE =
+luno.argReader.ARG_TYPE =
 {
     POSITIONAL = 0,
     FLAG       = 1,
@@ -23,7 +26,7 @@ ARG_TYPE =
 }
 
 
-function getArgTable(args, argMap)
+function luno.argReader.getArgTable(args, argMap)
     local ret = {}
     local i, arg = next(args)
     local n = 1
@@ -50,3 +53,4 @@ function getArgTable(args, argMap)
     return ret
 end
 
+return luno.argReader

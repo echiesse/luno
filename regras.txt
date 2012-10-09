@@ -1,0 +1,9 @@
+Regras:
+
+1 - Os módulos "base" e "util" são os únicos completamente independentes em Luno.
+2 - Os demais módulos em "luno" podem depender no máximo de:
+    - A biblioteca padrão de lua (as quais não precisam de "require")
+    - "luno.base" e/ou "luno.util".
+3 - Módulos que dependam de outros módulos de "luno" devem ficar sob "lunox" (Luno Extended)
+4 - Nenhuma dependência externa é permitida em "luno" e "lunox". (Exceção feita à biblioteca padrão de "lua")
+5 - Módulos que extendam módulos externos a "luno" devem ficar sob "lunoxd" (Luno External Dependency)

@@ -4,9 +4,12 @@
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
-ioEx = {}
+require"luno.base"
 
-function ioEx.getTextFromFile(fileName)
+
+luno.io = {}
+
+function luno.io.getTextFromFile(fileName)
     local file, msg = io.open(fileName, "rt")
     local ret
     if file == nil then
@@ -18,10 +21,10 @@ function ioEx.getTextFromFile(fileName)
 end
 
 
-function ioEx.saveTextToFile(text, fileName)
+function luno.io.saveTextToFile(text, fileName)
     local file = io.open(fileName, "wt")
     file:write(text)
 end
 
 
-return ioEx
+return luno.io

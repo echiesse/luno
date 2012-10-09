@@ -4,6 +4,14 @@
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
+require"luno.base"
+require"luno.util"
+
+
+luno.funcional = {}
+F = luno.funcional
+
+
 -- Funções auxiliares:
 local function tbAppend(t1, t2)
     local ret = {}
@@ -17,6 +25,7 @@ local function tbAppend(t1, t2)
 end
 
 
+--[[
 local function copy(val)
     local ret
     if type(val) == "table" then
@@ -30,9 +39,9 @@ local function copy(val)
     end
     return ret
 end
+]]
 
 --##############################################################################
-F = {}
 
 --------------------------------------------------------------------------------
 -- Funções sobre listas:
@@ -293,4 +302,6 @@ function Op.notf(a)    return (not a) end
 function isEven(a) return (a%2 == 0) end
 function isOdd(a)  return (a%2 ~= 0) end
 
-return F
+--##############################################################################
+
+return luno.funcional

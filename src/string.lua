@@ -4,9 +4,12 @@
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
-stringEx = {}
+require"luno.base"
 
-function stringEx.split(str, sep)
+
+luno.string = {}
+
+function luno.string.split(str, sep)
     local ini = 1
     local fim, aux = string.find(str, sep)
     local ret = {}
@@ -21,7 +24,7 @@ function stringEx.split(str, sep)
 end
 
 
-function stringEx.join(list, sep)
+function luno.string.join(list, sep)
     local ret = list[1] or ""
     for i = 2, #list do
         ret = ret .. sep .. list[i]
@@ -30,74 +33,74 @@ function stringEx.join(list, sep)
 end
 
 
-function stringEx.ltrim(str)
+function luno.string.ltrim(str)
     return string.gsub(str, "^%s*", "")
 end
 
 
-function stringEx.rtrim(str)
+function luno.string.rtrim(str)
     return string.gsub(str, "%s*$", "")
 end
 
 
-function stringEx.trim(str)
-    return stringEx.rtrim(stringEx.ltrim(str))
+function luno.string.trim(str)
+    return luno.string.rtrim(luno.string.ltrim(str))
 end
 
 
-function stringEx.gltrim(str, pattern)
+function luno.string.gltrim(str, pattern)
     return string.gsub(str, "^" .. pattern, "")
 end
 
 
-function stringEx.grtrim(str, pattern)
+function luno.string.grtrim(str, pattern)
     return string.gsub(str, pattern .. "$", "")
 end
 
 
-function stringEx.gtrim(str, patternLeft, patternRight)
+function luno.string.gtrim(str, patternLeft, patternRight)
     patternRight = patternRight or patternLeft
-    local ret = stringEx.gltrim(str, patternLeft)
-    ret = stringEx.grtrim(ret, patternRight)
+    local ret = luno.string.gltrim(str, patternLeft)
+    ret = luno.string.grtrim(ret, patternRight)
     return ret
 end
 
 
-function stringEx.beginsWith(strTest, str)
+function luno.string.beginsWith(strTest, str)
     return (string.find(str, "^" .. strTest) ~= nil)
 end
 
 
-function stringEx.endsWith(strTest, str)
+function luno.string.endsWith(strTest, str)
     return (string.find(str, strTest .. "$") ~= nil)
 end
 
 
-function stringEx.splitWords(text)
-    return stringEx.split(text, "%s")
+function luno.string.splitWords(text)
+    return luno.string.split(text, "%s")
 end
 
 
-function stringEx.joinWords(words)
-    return stringEx.join(words, " ")
+function luno.string.joinWords(words)
+    return luno.string.join(words, " ")
 end
 
 
-function stringEx.splitLines(text)
-    return stringEx.split(text, "\r?\n")
+function luno.string.splitLines(text)
+    return luno.string.split(text, "\r?\n")
 end
 
 
-function stringEx.joinLines(lines)
-    return stringEx.join(lines, "\n")
+function luno.string.joinLines(lines)
+    return luno.string.join(lines, "\n")
 end
 
 
-function stringEx.strLinesIterator(text)
-    return stringEx.splitIterator(text, "\r?\n")
+function luno.string.strLinesIterator(text)
+    return luno.string.splitIterator(text, "\r?\n")
 end
 
-function stringEx.splitIterator(text, sep)
+function luno.string.splitIterator(text, sep)
     local ini, fim = 1, 1
     local aux
     local _f = function(s, var)
@@ -120,40 +123,40 @@ function stringEx.splitIterator(text, sep)
 end
 
 
-function stringEx.removeFirstN(n, str)
+function luno.string.removeFirstN(n, str)
     return string.sub(str, 1 + n)
 end
 
 
-function stringEx.removeFirst(str)
-    return stringEx.removeFirstN(1, str)
+function luno.string.removeFirst(str)
+    return luno.string.removeFirstN(1, str)
 end
 
 
-function stringEx.removeLastN(n, str)
+function luno.string.removeLastN(n, str)
     return string.sub(str, 1, #str - n)
 end
 
 
-function stringEx.removeLast(str)
-    return stringEx.removeLastN(1, str)
+function luno.string.removeLast(str)
+    return luno.string.removeLastN(1, str)
 end
 
 
-function stringEx.charAt(str, pos)
+function luno.string.charAt(str, pos)
     return string.sub(str, pos, pos)
 end
 
 
-function stringEx.lastChar(str, pos)
+function luno.string.lastChar(str, pos)
     return string.sub(str, -1)
 end
 
 
-function stringEx.firstChar(str, pos)
-    return stringEx.charAt(str, 1)
+function luno.string.firstChar(str, pos)
+    return luno.string.charAt(str, 1)
 end
 
 
 
-return stringEx
+return luno.string

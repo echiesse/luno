@@ -4,6 +4,10 @@
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
+require"luno.base"
+
+
+luno.util = {} -- Apenas para dizer que "luno.util" está carregado
 
 --- Escolhe uma das duas opções conforme a condição seja verdadeira ou falsa.
 --  @param condition  Condição a ser avaliada.

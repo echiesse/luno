@@ -4,9 +4,12 @@
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
-tableEx = {}
+require"luno.base"
 
-function tableEx.append(t1, t2)
+
+luno.table = {}
+
+function luno.table.append(t1, t2)
     local ret = {}
 
     for _i, t in ipairs{t1,t2} do
@@ -18,24 +21,24 @@ function tableEx.append(t1, t2)
 end
 
 
-function tableEx.print(tb)
+function luno.table.print(tb)
     for i, v in pairs(tb) do
         print(i, v)
     end
 end
 
 
-function tableEx.isEmpty(tb)
+function luno.table.isEmpty(tb)
     return (next(tb) == nil)
 end
 
 
-function tableEx.last(tb)
+function luno.table.last(tb)
     return tb[#tb]
 end
 
 
-function tableEx.find(tb, value, test)
+function luno.table.find(tb, value, test)
     local ret = {}
 
     test = test or (function(a,b) return a==b end)
@@ -48,4 +51,4 @@ function tableEx.find(tb, value, test)
     return ret
 end
 
-return tableEx
+return luno.table

@@ -4,6 +4,11 @@
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
+require"luno.base"
+
+
+luno.oop = {}
+
 local commonCreateClass
 
 
