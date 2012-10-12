@@ -15,7 +15,7 @@ end
 
 function lunoReset()
     luno = nil
-    startupLuno()
+    lunoStartup()
 end
 
 
