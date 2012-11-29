@@ -5,9 +5,35 @@
 -- *****************************************************************************
 
 require"luno.base"
+require"luno.util"
 
 
 luno.table = {}
+
+
+function luno.table.exposeAll()
+    expose(luno.table)
+end
+
+
+function luno.table.useAlias()
+    ltable = luno.table
+end
+
+
+function luno.table.exposeSome()
+    local mainFunctions =
+    {
+        "isEmpty",
+    }
+
+    for i, v in ipairs(mainFunctions) do
+        _G[v] = luno.table[v]
+    end
+end
+
+
+--##############################################################################
 
 function luno.table.append(t1, t2)
     local ret = {}

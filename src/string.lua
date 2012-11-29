@@ -5,9 +5,39 @@
 -- *****************************************************************************
 
 require"luno.base"
+require"luno.util"
 
 
 luno.string = {}
+
+function luno.string.exposeAll()
+    expose(luno.string)
+end
+
+
+function luno.string.useAlias()
+    lstring = luno.string
+end
+
+
+function luno.string.exposeSome()
+    local mainFunctions =
+    {
+        "trim",
+        "gtrim",
+        "split",
+        "splitLines",
+        "join",
+        "joinWords",
+    }
+
+    for i, v in ipairs(mainFunctions) do
+        _G[v] = luno.string[v]
+    end
+end
+
+
+--##############################################################################
 
 function luno.string.split(str, sep)
     local ini = 1
@@ -25,6 +55,7 @@ end
 
 
 function luno.string.join(list, sep)
+    local sep = sep or ""
     local ret = list[1] or ""
     for i = 2, #list do
         ret = ret .. sep .. list[i]

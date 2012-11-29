@@ -5,9 +5,18 @@
 -- *****************************************************************************
 
 require"luno.base"
+require"luno.util"
 
 
 luno.argReader = {}
+
+
+function luno.argReader.exposeAll()
+    expose(luno.argReader)
+end
+
+
+--##############################################################################
 
 --[[
 -- Exemplo de mapa de argumentos:

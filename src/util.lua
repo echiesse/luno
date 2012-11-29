@@ -83,8 +83,17 @@ end
 
 function expose(tab)
     for i, v in pairs(tab) do
-        if type(i) ~= "number" then
+        if type(i) == "string" then
             _G[i] = v
+        end
+    end
+end
+
+
+function exposeOnly(tab, keys)
+    for i, v in ipairs(keys) do
+        if type(v) == "string" then
+            _G[v] = tab[v]
         end
     end
 end

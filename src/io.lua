@@ -5,9 +5,36 @@
 -- *****************************************************************************
 
 require"luno.base"
+require"luno.util"
 
 
 luno.io = {}
+
+
+function luno.io.exposeAll()
+    expose(luno.io)
+end
+
+
+function luno.io.useAlias()
+    lio = luno.io
+end
+
+
+luno.io.exposeSome = luno.io.exposeAll
+--[[
+function luno.io.exposeSome()
+    local mainFunctions =
+    {
+    }
+
+    for i, v in ipairs(mainFunctions) do
+        _G[v] = luno.io[v]
+    end
+end
+]]
+
+--##############################################################################
 
 function luno.io.getTextFromFile(fileName)
     local file, msg = io.open(fileName, "rt")
