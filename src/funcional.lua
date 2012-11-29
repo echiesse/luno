@@ -9,8 +9,28 @@ require"luno.util"
 
 
 luno.funcional = {}
-F = luno.funcional
 
+
+function luno.funcional.exposeAll()
+    expose(luno.funcional)
+end
+
+
+function luno.funcional.useAlias()
+    F = luno.funcional
+end
+
+
+--[[
+function luno.funcional.exposeSome()
+end
+]]
+
+
+-- O módulo funcional por padrão usa aliases
+luno.funcional.useAlias()
+
+--##############################################################################
 
 -- Funções auxiliares:
 local function tbAppend(t1, t2)
@@ -25,27 +45,10 @@ local function tbAppend(t1, t2)
 end
 
 
---[[
-local function copy(val)
-    local ret
-    if type(val) == "table" then
-        ret = {}
-        for i, v in pairs(val) do
-            ret[copy(i)] = copy(v)
-            setmetatable(ret, getmetatable(val))
-        end
-    else
-        ret = val
-    end
-    return ret
-end
-]]
-
 --##############################################################################
 
 --------------------------------------------------------------------------------
 -- Funções sobre listas:
-
 
 function F.head(list)
     return list[1]
