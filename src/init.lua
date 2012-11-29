@@ -14,7 +14,7 @@ require"luno.util"
 require"luno.string"
 require"luno.table"
 require"luno.io"
-require"luno.funcional"
+require"luno.functional"
 require"luno.oop"
 
 require"luno.argReader" -- <<<<< Considerar criar a lib "lunox" e colocar argReader nela

@@ -8,27 +8,27 @@ require"luno.base"
 require"luno.util"
 
 
-luno.funcional = {}
+luno.functional = {}
 
 
-function luno.funcional.exposeAll()
-    expose(luno.funcional)
+function luno.functional.exposeAll()
+    expose(luno.functional)
 end
 
 
-function luno.funcional.useAlias()
-    F = luno.funcional
+function luno.functional.useAlias()
+    F = luno.functional
 end
 
 
 --[[
-function luno.funcional.exposeSome()
+function luno.functional.exposeSome()
 end
 ]]
 
 
--- O módulo funcional por padrão usa aliases
-luno.funcional.useAlias()
+-- O módulo functional por padrão usa aliases
+luno.functional.useAlias()
 
 --##############################################################################
 
@@ -307,4 +307,4 @@ function isOdd(a)  return (a%2 ~= 0) end
 
 --##############################################################################
 
-return luno.funcional
+return luno.functional
