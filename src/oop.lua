@@ -1,6 +1,6 @@
 -- *****************************************************************************
 -- Luno
--- Copyright (c) 2011-2012 Eric Chiesse de Souza (www.echiesse.com.br)
+-- Copyright (c) 2011-2013 Eric Chiesse de Souza (www.echiesse.com.br)
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
@@ -12,7 +12,7 @@ luno.oop = {}
 local commonCreateClass
 
 
-function Class(className, Base, env)
+function class(className, Base, env)
     env = env or _G
     env[className] = {}
     local ClassTable = env[className]

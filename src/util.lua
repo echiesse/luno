@@ -1,6 +1,6 @@
 -- *****************************************************************************
 -- Luno
--- Copyright (c) 2011-2012 Eric Chiesse de Souza (www.echiesse.com.br)
+-- Copyright (c) 2011-2013 Eric Chiesse de Souza (www.echiesse.com.br)
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
@@ -54,12 +54,7 @@ function printDeep(val, level, lookup)
 end
 
 
---- Copia uma variável lua em profundidade. Caso seja uma tabela que contenha
---  ciclos, esses são tratados adequadamente.
---
---  @param val Valor a ser copiado
---  @return    A cópia do valor de entrada
-function copy(val, lookup)
+local function _copy(val, lookup)
     local ret
     lookup = lookup or {}
     if type(val) == "table" then
@@ -69,8 +64,8 @@ function copy(val, lookup)
             ret = {}
             lookup[val] = ret
             for i, v in pairs(val) do
-                local index = lookup[i] or copy(i, lookup)
-                local value = lookup[v] or copy(v, lookup)
+                local index = lookup[i] or _copy(i, lookup)
+                local value = lookup[v] or _copy(v, lookup)
                 ret[index] = value
             end
         end
@@ -78,6 +73,15 @@ function copy(val, lookup)
         ret = val
     end
     return ret
+end
+
+--- Copia uma variável lua em profundidade. Caso seja uma tabela que contenha
+--  ciclos, esses são tratados adequadamente.
+--
+--  @param val Valor a ser copiado
+--  @return    A cópia do valor de entrada
+function copy(val)
+    return _copy(val)
 end
 
 

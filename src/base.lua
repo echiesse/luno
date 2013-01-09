@@ -1,6 +1,6 @@
 -- *****************************************************************************
 -- Luno
--- Copyright (c) 2011-2012 Eric Chiesse de Souza (www.echiesse.com.br)
+-- Copyright (c) 2011-2013 Eric Chiesse de Souza (www.echiesse.com.br)
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 

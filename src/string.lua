@@ -1,6 +1,6 @@
 -- *****************************************************************************
 -- Luno
--- Copyright (c) 2011-2012 Eric Chiesse de Souza (www.echiesse.com.br)
+-- Copyright (c) 2011-2013 Eric Chiesse de Souza (www.echiesse.com.br)
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
@@ -23,12 +23,15 @@ end
 function luno.string.exposeSome()
     local mainFunctions =
     {
+        "charAt",
         "trim",
         "gtrim",
         "split",
         "splitLines",
+        "splitWords",
         "join",
         "joinWords",
+        "joinLines",
     }
 
     for i, v in ipairs(mainFunctions) do
@@ -38,31 +41,6 @@ end
 
 
 --##############################################################################
-
-function luno.string.split(str, sep)
-    local ini = 1
-    local fim, aux = string.find(str, sep)
-    local ret = {}
-    while fim ~= nil do
-        local trecho = string.sub(str, ini, fim-1)
-        table.insert(ret, trecho)
-        ini = aux + 1
-        fim, aux = string.find(str, sep, ini)
-    end
-    table.insert(ret, string.sub(str, ini))
-    return ret
-end
-
-
-function luno.string.join(list, sep)
-    local sep = sep or ""
-    local ret = list[1] or ""
-    for i = 2, #list do
-        ret = ret .. sep .. list[i]
-    end
-    return ret
-end
-
 
 function luno.string.ltrim(str)
     return string.gsub(str, "^%s*", "")
@@ -107,13 +85,23 @@ function luno.string.endsWith(strTest, str)
 end
 
 
-function luno.string.splitWords(text)
-    return luno.string.split(text, "%s")
+function luno.string.split(str, sep)
+    local ret = {}
+    local ini = 1
+    local fim, aux = string.find(str, sep)
+    while fim ~= nil do
+        local trecho = string.sub(str, ini, fim-1)
+        table.insert(ret, trecho)
+        ini = aux + 1
+        fim, aux = string.find(str, sep, ini)
+    end
+    table.insert(ret, string.sub(str, ini))
+    return ret
 end
 
 
-function luno.string.joinWords(words)
-    return luno.string.join(words, " ")
+function luno.string.splitWords(text)
+    return luno.string.split(text, "%s+")
 end
 
 
@@ -121,15 +109,6 @@ function luno.string.splitLines(text)
     return luno.string.split(text, "\r?\n")
 end
 
-
-function luno.string.joinLines(lines)
-    return luno.string.join(lines, "\n")
-end
-
-
-function luno.string.strLinesIterator(text)
-    return luno.string.splitIterator(text, "\r?\n")
-end
 
 function luno.string.splitIterator(text, sep)
     local ini, fim = 1, 1
@@ -151,6 +130,31 @@ function luno.string.splitIterator(text, sep)
     end
 
     return _f, text, ""
+end
+
+
+function luno.string.join(list, sep)
+    local sep = sep or ""
+    local ret = list[1] or ""
+    for i = 2, #list do
+        ret = ret .. sep .. list[i]
+    end
+    return ret
+end
+
+
+function luno.string.joinWords(words)
+    return luno.string.join(words, " ")
+end
+
+
+function luno.string.joinLines(lines)
+    return luno.string.join(lines, "\n")
+end
+
+
+function luno.string.strLinesIterator(text)
+    return luno.string.splitIterator(text, "\r?\n")
 end
 
 

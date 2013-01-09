@@ -1,6 +1,6 @@
 -- *****************************************************************************
 -- Luno
--- Copyright (c) 2011-2012 Eric Chiesse de Souza (www.echiesse.com.br)
+-- Copyright (c) 2011-2013 Eric Chiesse de Souza (www.echiesse.com.br)
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
@@ -76,5 +76,40 @@ function luno.table.find(tb, value, test)
     end
     return ret
 end
+
+
+function luno.table.slice(tb, bSlice, eSlice)
+    bSlice = bSlice or 1
+    if bSlice == 0 then
+        bSlice = 1
+    elseif bSlice < 0 then
+        bSlice = #tb + bSlice + 1
+    end
+
+    eSlice = eSlice or #tb
+    if eSlice == 0 then
+        eSlice = 1
+    elseif eSlice < 0 then
+        eSlice = #tb + eSlice + 1
+    elseif eSlice > #tb then
+        eSlice = #tb + 1 -- Apenas melhorando o desempenho
+    end
+
+    if eSlice < bSlice then
+        -- Erro ?
+        error("bSlice must be less than or equal eSlice", 2)
+    end
+
+
+    local ret = {}
+    if bSlice <= #tb then
+        for i = bSlice, eSlice do
+            table.insert(ret, tb[i])
+        end
+    end
+
+    return ret
+end
+
 
 return luno.table

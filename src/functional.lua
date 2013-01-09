@@ -1,6 +1,6 @@
 -- *****************************************************************************
 -- Luno
--- Copyright (c) 2011-2012 Eric Chiesse de Souza (www.echiesse.com.br)
+-- Copyright (c) 2011-2013 Eric Chiesse de Souza (www.echiesse.com.br)
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
@@ -59,6 +59,20 @@ function F.tail(list)
     local ret = {}
     for i = 2, #list do
         ret[i-1] = list[i]
+    end
+    return ret
+end
+
+
+function F.last(list)
+    return list[#list]
+end
+
+
+function F.init(list)
+    local ret = {}
+    for i = 1, #list-1 do
+        ret[i] = list[i]
     end
     return ret
 end
