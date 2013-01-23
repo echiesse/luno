@@ -47,6 +47,56 @@ function luno.table.append(t1, t2)
 end
 
 
+---
+--  Append com acumulador (t1 serve como acumulador)
+--
+function luno.table.appendA(t1, t2)
+    for i, v in ipairs(t2) do
+        table.insert(t1, v)
+    end
+end
+
+
+function luno.table.equals(tb1, tb2)
+    local ret = true
+    for i, v in pairs(tb1) do
+        if tb2[i] ~= v then
+            ret = false
+            break
+        end
+    end
+
+    if ret == true then
+        for i, v in pairs(tb2) do
+            if tb1[i] ~= v then
+                ret = false
+                break
+            end
+        end
+    end
+
+    return ret
+end
+
+
+function luno.table.iequals(l1, l2)
+    local ret = true
+
+    if #l2 ~= #l1 then
+        ret = false
+    else
+        for i, v in ipairs(l1) do
+            if l2[i] ~= v then
+                ret = false
+                break
+            end
+        end
+    end
+
+    return ret
+end
+
+
 function luno.table.print(tb)
     for i, v in pairs(tb) do
         print(i, v)
