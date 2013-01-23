@@ -50,12 +50,20 @@ end
 --------------------------------------------------------------------------------
 -- Funções sobre listas:
 
-function F.head(list)
+--------------------------------------------------------------------------------
+--  Obtem o primeiro elemento de uma lista.
+--  @param list Lista da qual se obtem o primeiro elemento.
+--  @return Primeiro elemento da lista.
+function luno.functional.head(list)
     return list[1]
 end
 
 
-function F.tail(list)
+--------------------------------------------------------------------------------
+--  Obtem uma nova lista sem o primeiro elemento.
+--  @param list Lista a ser processada.
+--  @return Lista sem o primeiro elemento.
+function luno.functional.tail(list)
     local ret = {}
     for i = 2, #list do
         ret[i-1] = list[i]
@@ -64,12 +72,20 @@ function F.tail(list)
 end
 
 
-function F.last(list)
+--------------------------------------------------------------------------------
+--  Obtem o último elemento de uma lista.
+--  @param list Lista da qual se obtem o último elemento.
+--  @return Último elemento da lista.
+function luno.functional.last(list)
     return list[#list]
 end
 
 
-function F.init(list)
+--------------------------------------------------------------------------------
+--  Obtem uma nova lista sem o último elemento.
+--  @param list Lista a ser processada.
+--  @return Lista sem o último elemento.
+function luno.functional.init(list)
     local ret = {}
     for i = 1, #list-1 do
         ret[i] = list[i]
@@ -78,7 +94,12 @@ function F.init(list)
 end
 
 
-function F.take(n, list)
+--------------------------------------------------------------------------------
+--  Obtem uma nova lista contendo os n primeiros elementos da lista original.
+--  @param n    Número de elementos a serem obtidos.
+--  @param list Lista a ser processada.
+--  @return Lista com os n primeiros elementos da lista original.
+function luno.functional.take(n, list)
     local ret = {}
     for i = 1, n do
         ret[i] = list[i]
@@ -87,7 +108,12 @@ function F.take(n, list)
 end
 
 
-function F.drop(n, list)
+--------------------------------------------------------------------------------
+--  Obtem uma nova lista sem os n primeiros elementos da lista original.
+--  @param n    Número de elementos a serem extraídos.
+--  @param list Lista a ser processada.
+--  @return Lista sem os n primeiros elementos da lista original.
+function luno.functional.drop(n, list)
     local ret = {}
     for i = n+1, #list do
         table.insert(ret, list[i])
@@ -97,7 +123,11 @@ end
 
 
 --------------------------------------------------------------------------------
-function F.any(f, list)
+--  Verifica se algum elemento da lista satisfaz o predicado
+--  @param f Predicado a ser preenchido. Deve ser uma função que returna um booleano.
+--  @param list Lista a ser testada
+--  @return Retorna true se algum elemento satifizer o predicado e false caso contrário
+function luno.functional.any(f, list)
     local ret = false
     for i, v in ipairs(list) do
         if f(v) == true then
@@ -109,7 +139,12 @@ function F.any(f, list)
 end
 
 
-function F.all(f, list)
+--------------------------------------------------------------------------------
+--  Verifica se todos os elementos da lista satisfazem o predicado
+--  @param f Predicado a ser preenchido. Deve ser uma função que returna um booleano.
+--  @param list Lista a ser testada
+--  @return Retorna true se todos os elementos satifizerem o predicado e false caso contrário.
+function luno.functional.all(f, list)
     local ret = true
     for i, v in ipairs(list) do
         if f(v) == false then
@@ -121,7 +156,15 @@ function F.all(f, list)
 end
 
 
-function F.map(f, list)
+--------------------------------------------------------------------------------
+--  Produz uma lista onde os elementos são resultantes da aplicação de uma função
+-- a cada elemento de uma lista inicial.
+--  @param f    Função a ser aplicada aos elementos de list.
+--  @param list Lista com os elementos originais. list deve ser uma tabela lua
+-- com índices numéricos.
+--  @return Retorna uma lista em que cada elemento é resultante da aplicação da
+-- função f à lista list.
+function luno.functional.map(f, list)
     local ret = {}
     for i, v in ipairs(list) do
         ret[i] = f(v)
@@ -130,16 +173,34 @@ function F.map(f, list)
 end
 
 
-function F.gmap(f, list)
+--------------------------------------------------------------------------------
+--  Produz uma tabela onde os elementos são resultantes da aplicação de uma função
+-- a cada elemento de uma tabela inicial. Diferente de map, gmap também aplica f
+-- aos itens indexados por índices não numéricos.
+--  @param f    Função a ser aplicada aos elementos de tab.
+--  @param tab  Tabela com os elementos originais.
+--  @return Retorna uma tabela em que cada elemento é resultante da aplicação da
+-- função f à tabela original tab.
+function luno.functional.gmap(f, tab)
     local ret = {}
-    for i, v in pairs(list) do
+    for i, v in pairs(tab) do
         ret[i] = f(v)
     end
     return ret
 end
 
 
-function F.mapi(f, list)
+--------------------------------------------------------------------------------
+--  Produz uma lista onde os elementos são resultantes da aplicação de uma função
+-- a cada elemento de uma lista inicial e seu índice.
+--  @param f    Função a ser aplicada aos elementos de list e ao seu índice.
+-- f deve receber dois argumentos: elem e i onde elem é o elemento a ser
+-- processado e i o seu índice.
+--  @param list Lista com os elementos originais. list deve ser uma tabela lua
+-- com índices numéricos.
+--  @return Retorna uma lista em que cada elemento é resultante da aplicação da
+-- função f à lista list.
+function luno.functional.mapi(f, list)
     local ret = {}
     for i, v in ipairs(list) do
         ret[i] = f(v, i)
@@ -148,16 +209,16 @@ function F.mapi(f, list)
 end
 
 
-function F.gmapi(f, list)
+function luno.functional.gmapi(f, tab)
     local ret = {}
-    for i, v in pairs(list) do
+    for i, v in pairs(tab) do
         ret[i] = f(v, i)
     end
     return ret
 end
 
 
-function F.filter(f, list)
+function luno.functional.filter(f, list)
     local ret = {}
     local j = 1
     for i, v in ipairs(list) do
@@ -170,7 +231,7 @@ function F.filter(f, list)
 end
 
 
-function F.gfilter(f, list)
+function luno.functional.gfilter(f, list)
     local ret = {}
     for i, v in pairs(list) do
         if f(v) == true then
@@ -181,7 +242,7 @@ function F.gfilter(f, list)
 end
 
 
-function F.reduce(f, list, iniVal)
+function luno.functional.reduce(f, list, iniVal)
     list = copy(list) -- Evitar efeitos colaterais no chamador
     if iniVal == nil then
         if #list < 2 then
@@ -202,44 +263,46 @@ function F.reduce(f, list, iniVal)
 end
 
 
-function F.flip(f, a, b)
+function luno.functional.flip(f, a, b)
     return f(b,a)
 end
 
 
 --------------------------------------------------------------------------------
-function F.partial(f, ...)
+function luno.functional.partial(f, ...)
     local uArg = copy({...}) -- Evita efeitos colaterais
     return function(...) return f(unpack(tbAppend(uArg, {...}))) end
 end
 
 
-function F.rpartial(f, ...)
+function luno.functional.rpartial(f, ...)
     local uArg = copy({...}) -- Evita efeitos colaterais
     return function(...) return f(unpack(tbAppend({...}, uArg))) end
 end
 
 --- Funções de aplicação parcial que permitem efeitos colaterais
-function F.cpartial(f, ...)
+
+--------------------------------------------------------------------------------
+function luno.functional.cpartial(f, ...)
     local uArg = {...}
     return function(...) return f(unpack(tbAppend(uArg, {...}))) end
 end
 
 
-function F.crpartial(f, ...)
+function luno.functional.crpartial(f, ...)
     local uArg = {...}
     return function(...) return f(unpack(tbAppend({...}, uArg))) end
 end
 
 
-function F.compose(f1, f2)
+function luno.functional.compose(f1, f2)
     return function(...)
         return f1(f2(...))
     end
 end
 
 
-function F.gcompose(...)
+function luno.functional.gcompose(...)
     local funcs = {...}
     if type(funcs[1]) == "table" then
         funcs = funcs[1]
@@ -256,8 +319,8 @@ function F.gcompose(...)
 end
 
 
--- Versão iterativa de F.pipe
-function F.pipe(...)
+-- Versão iterativa de luno.functional.pipe
+function luno.functional.pipe(...)
     local funcs = {...}
     if type(funcs[1]) == "table" then
         funcs = funcs[1]
@@ -273,8 +336,8 @@ function F.pipe(...)
 end
 
 
--- Versão recursiva de F.pipe
-function F.pipeR(...)
+-- Versão recursiva de luno.functional.pipe
+function luno.functional.pipeR(...)
     local funcs = {...}
     if type(funcs[1]) == "table" then
         funcs = funcs[1]
@@ -284,7 +347,7 @@ function F.pipeR(...)
     elseif #funcs > 1 then
         local f = funcs[#funcs]
         table.remove(funcs)
-        return function(...) return f(F.pipeR(funcs)(...)) end
+        return function(...) return f(luno.functional.pipeR(funcs)(...)) end
     else
         return nil
     end
@@ -294,26 +357,26 @@ end
 --##############################################################################
 
 -- Operadores
-Op = {}
-function Op.mul(a, b) return a * b end
-function Op.add(a, b) return a + b end
-function Op.sub(a, b) return a - b end
-function Op.div(a, b) return a / b end
-function Op.mod(a, b) return a % b end
-function Op.cat(a, b) return a .. b end
-function Op.neg(a)    return (-a) end
-function Op.len(a)    return #a end
+op = {}
+function op.mul(a, b) return a * b end
+function op.add(a, b) return a + b end
+function op.sub(a, b) return a - b end
+function op.div(a, b) return a / b end
+function op.mod(a, b) return a % b end
+function op.cat(a, b) return a .. b end
+function op.neg(a)    return (-a) end
+function op.len(a)    return #a end
 
-function Op.eq(a,b) return a == b end
-function Op.ne(a,b) return a ~= b end
-function Op.gt(a,b) return a >  b end
-function Op.ge(a,b) return a >= b end
-function Op.lt(a,b) return a <  b end
-function Op.le(a,b) return a <= b end
+function op.eq(a,b) return a == b end
+function op.ne(a,b) return a ~= b end
+function op.gt(a,b) return a >  b end
+function op.ge(a,b) return a >= b end
+function op.lt(a,b) return a <  b end
+function op.le(a,b) return a <= b end
 
-function Op.andf(a, b) return (a and b) end
-function Op.orf(a, b)  return (a or b) end
-function Op.notf(a)    return (not a) end
+function op.andf(a, b) return (a and b) end
+function op.orf(a, b)  return (a or b) end
+function op.notf(a)    return (not a) end
 
 -- Predicados
 function isEven(a) return (a%2 == 0) end
