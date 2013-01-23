@@ -75,16 +75,35 @@ function luno.string.gtrim(str, patternLeft, patternRight)
 end
 
 
-function luno.string.beginsWith(strTest, str)
+--------------------------------------------------------------------------------
+--  Verifica se uma string começa pelo conteúdo de uma outra string.
+--  @param str     A string a ser verificada
+--  @param strTest A string com a qual o ínicio de str será comparado
+--------------------------------------------------------------------------------
+function luno.string.beginsWith(str, strTest)
     return (string.find(str, "^" .. strTest) ~= nil)
 end
 
 
-function luno.string.endsWith(strTest, str)
+--------------------------------------------------------------------------------
+--  Verifica se uma string termina pelo conteúdo de uma outra string.
+--  @param str     A string a ser verificada
+--  @param strTest A string com a qual o fim de str será comparado
+--------------------------------------------------------------------------------
+function luno.string.endsWith(str, strTest)
     return (string.find(str, strTest .. "$") ~= nil)
 end
 
 
+--------------------------------------------------------------------------------
+--  Quebra uma string de acordo com um determinado separados.
+--  @param str A string a ser quebrada.
+--  @param sep Separador usado para definir os pontos de quebra. <i>sep</i> também pode ser um padrão.
+--  @return Uma lista contendo as partes da string original. As partes não incluem o separador utilizado.
+--  @usage luno.string.split("a,b,c", ",") --> {"a","b","c"}
+--  @usage luno.string.split(",,", ",") --> {"","",""}
+--  @usage luno.string.split("a b  c    d", "%s+") --> {"a","b","c","d"}
+--------------------------------------------------------------------------------
 function luno.string.split(str, sep)
     local ret = {}
     local ini = 1
