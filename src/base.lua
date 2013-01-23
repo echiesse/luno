@@ -4,33 +4,8 @@
 -- Read "License.txt" for the license terms
 -- *****************************************************************************
 
+luno = {}
 
-function lunoStartup()
-    if type(luno) ~= "table" then
-        luno = {}
-    end
-    return luno
-end
-
-
-function lunoReset()
-    luno = nil
-    lunoStartup()
-end
-
-
-function lunoGetLoadedLibs()
-    local ret = {}
-    for i, v in pairs(luno) do
-        table.insert(ret, i)
-    end
-    return ret
-end
-
-
-lunoStartup()
-
---##############################################################################
 function luno.exposeAll()
     for k, v in pairs(luno) do
         if type(v) == "table" then

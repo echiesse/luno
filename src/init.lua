@@ -8,8 +8,6 @@
 -- Carregar todas as libs
 
 require"luno.base"
-lunoReset()
-
 require"luno.util"
 require"luno.string"
 require"luno.table"
