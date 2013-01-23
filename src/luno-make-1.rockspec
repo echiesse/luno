@@ -9,15 +9,12 @@ source =
 description =
 {
     summary = "General purpose libraries for Lua.",
-    detailed = [[Luno is a native lua implementation of a series of helpers for common tasks not covered in the standard library. Luno also provides support for functional and object oriented programming paradigms.
-The library comprises the following packages:
-    - luno.util        - General purpose functions
-    - luno.argReader   - Deals with command line arguments
-    - luno.io          - Helper io functions
-    - luno.string      - Helper string functions
-    - luno.table       - Helper table function
-    - luno.functional  - Helps to write functional code in Lua.
-    - luno.oop         - Helps to write oo code in Lua.
+    detailed = [[Luno is a pure Lua implementation of a series of extensions for common tasks not covered in the standard library.
+The library comprises extended functions for dealing with strings, tables and io as well as some other general purpose functions like deep copy of tables.
+
+Luno offers a small framework for object oriented programming. It is possible do declare a class, define a contructor, methods and even use inheritance.
+
+Luno also provides support for functional programming. Functions like map, filter, reduce and many list operations are available. Also support for function composition and partial parameter application (sometimes refered to as currying) is implemented.
 
 Note: Luno means Lua (moon) in esperanto.]],
     homepage = "http://code.google.com/p/luno/",
