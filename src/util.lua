@@ -9,7 +9,8 @@ require"luno.base"
 
 luno.util = {} -- Apenas para dizer que "luno.util" está carregado
 
---- Escolhe uma das duas opções conforme a condição seja verdadeira ou falsa.
+--------------------------------------------------------------------------------
+--  Escolhe uma das duas opções conforme a condição seja verdadeira ou falsa.
 --  @param condition  Condição a ser avaliada.
 --  @param valueTrue  Valor a ser retornado caso a expressão seja verdadeira.
 --  @param valueFalse Valor a ser retornado caso a expressão seja falsa.
@@ -24,12 +25,14 @@ function choose(condition, valueTrue, valueFalse)
 end
 
 
---- Imprime uma tabela em profundidade
---  @param val   Valor ou tabela a ser impresso
---  @param level Profundidade atual da variavel a ser impressa.
+--------------------------------------------------------------------------------
+--  Imprime uma tabela em profundidade
+--  @param val    Valor ou tabela a ser impresso
+--  @param level  Profundidade atual da variavel a ser impressa.
+--  @param lookup Tabela que guarda as tabelas já impressas para evitar recursões infinitas
 --  O valor padrão é nil
-function printDeep(val, level, lookup)
-    if level == nil then level = 0 end
+local function _printDeep(val, level, lookup)
+    level = level or 0
     local indentStep = "    "
     local indent = ""
     for i = 1, level do indent = indent .. indentStep end
@@ -41,7 +44,7 @@ function printDeep(val, level, lookup)
             if type(v) == "table" then
                 print(indent .. tostring(i) .. ": (" .. tostring(v) .. "):")
                 if lookup[v] == nil then
-                    printDeep(v, level + 1, lookup)
+                    _printDeep(v, level + 1, lookup)
                 end
             else
                 print(indent .. tostring(i) .. ": " .. tostring(v))
@@ -51,6 +54,15 @@ function printDeep(val, level, lookup)
         print(indent .. tostring(val))
     end
     return ret
+end
+
+
+--------------------------------------------------------------------------------
+--  Imprime uma tabela em profundidade
+--  @param val   Valor ou tabela a ser impresso
+--  O valor padrão é nil
+function printDeep(val)
+    return _printDeep(val)
 end
 
 
@@ -75,7 +87,8 @@ local function _copy(val, lookup)
     return ret
 end
 
---- Copia uma variável lua em profundidade. Caso seja uma tabela que contenha
+--------------------------------------------------------------------------------
+--  Copia uma variável lua em profundidade. Caso seja uma tabela que contenha
 --  ciclos, esses são tratados adequadamente.
 --
 --  @param val Valor a ser copiado
@@ -84,7 +97,9 @@ function copy(val)
     return _copy(val)
 end
 
-
+--------------------------------------------------------------------------------
+--  Expõe os campos da tabela para o ambiente global (_G)
+--  @param tab A tabela a ser exposta.
 function expose(tab)
     for i, v in pairs(tab) do
         if type(i) == "string" then
