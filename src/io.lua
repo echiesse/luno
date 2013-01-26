@@ -43,6 +43,7 @@ function luno.io.getTextFromFile(fileName)
         ret = {nil, msg}
     else
         ret = {file:read("*a")}
+        file:close()
     end
     return unpack(ret)
 end
@@ -51,6 +52,7 @@ end
 function luno.io.saveTextToFile(text, fileName)
     local file = io.open(fileName, "wt")
     file:write(text)
+    file:close()
 end
 
 
