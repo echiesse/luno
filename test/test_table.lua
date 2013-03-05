@@ -1,7 +1,6 @@
-require"luno.table"
 require"Test"
+require"luno.table"
 
-luno.table.useAlias()
 
 --##############################################################################
 -- Funções auxiliares:
@@ -13,13 +12,29 @@ local cases =
 {
     TestCase
     (
+        "useAlias",
+        function()
+            -- Criar arquivo temporário:
+            luno.table.useAlias()
+            local res =
+            {
+                assertTable(ltable),
+                assertEquals(luno.table, ltable)
+            }
+            return allTrue(res)
+        end
+    ),
+
+
+    TestCase
+    (
         "append",
         function()
             local t1 = {1,2,3}
             local t2 = {10,20,30}
 
-            local res1 = ltable.append(t1, t2)
-            local res2 = ltable.append(t2, t1)
+            local res1 = luno.table.append(t1, t2)
+            local res2 = luno.table.append(t2, t1)
 
 
             local ret =
@@ -40,7 +55,7 @@ local cases =
             local t1 = {1,2,3}
             local t2 = {10,20,30}
 
-            ltable.appendA(t1, t2)
+            luno.table.appendA(t1, t2)
 
 
             local ret =
@@ -65,13 +80,13 @@ local cases =
         function()
             local t1 = {1,2,3,4,5,6}
 
-            local res1 = ltable.slice(t1, 1, 2)
-            local res2 = ltable.slice(t1, 1, 6)
-            local res3 = ltable.slice(t1, 1, 1)
-            local res4 = ltable.slice(t1, 6, 6)
-            local res5 = ltable.slice(t1, 1, -1)
-            local res6 = ltable.slice(t1, -2, -1)
-            local res7 = ltable.slice(t1, -5, 6)
+            local res1 = luno.table.slice(t1, 1, 2)
+            local res2 = luno.table.slice(t1, 1, 6)
+            local res3 = luno.table.slice(t1, 1, 1)
+            local res4 = luno.table.slice(t1, 6, 6)
+            local res5 = luno.table.slice(t1, 1, -1)
+            local res6 = luno.table.slice(t1, -2, -1)
+            local res7 = luno.table.slice(t1, -5, 6)
 
 
             local ret =

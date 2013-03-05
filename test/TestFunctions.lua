@@ -38,6 +38,57 @@ function printList(list)
     print()
 end
 
+
+function getStackDepth()
+    local iniDepth = 2 -- Desconta getinfo e getStackDepth
+    local depth = iniDepth
+    local i = iniDepth
+    local info = debug.getinfo(i)
+    while info ~= nil do
+        i = i + 1
+        info = debug.getinfo(i)
+        depth = i
+    end
+    return depth - iniDepth
+end
+
+
+_S =
+{
+    level = 0
+}
+
+local function countHook(evtType)
+    local info = debug.getinfo(2)
+    --io.write(tostring(info.name or "??"))
+
+    if evtType == "call" then
+        --io.write("(\n")
+        _S.level = _S.level + 1
+    elseif evtType == "return" then
+        --io.write(")\n")
+        _S.level = _S.level - 1
+    end
+end
+
+local function startDepthCount()
+    _S.level = 0
+    --_S.log = ""
+    debug.sethook(countHook, "cr")
+end
+
+local function endDepthCount()
+    debug.sethook(nil)
+end
+
+function checkStackErrorDepth(level, f, ...)
+    startDepthCount()
+    local ret, msg = pcall(f, ...)
+    endDepthCount()
+    return level == _S.level
+end
+
+
 --------------------------------------------------------------------------------
 function allEquals(list, val)
     local ret = true
@@ -69,10 +120,11 @@ function anyTrue(list)
     return anyEquals(list, true)
 end
 
+
 --------------------------------------------------------------------------------
 function condMessage(res)
     if not res then
-        local info = debug.getinfo(4)
+        local info = debug.getinfo(3)
         print("Assertion failed at line " .. info.currentline .. " of " .. info.short_src)
     end
 end
@@ -89,6 +141,7 @@ end
 
 assertBoolean    = templateAssert(function(val) return (type(val) == "boolean") end)
 assertNil        = templateAssert(function(val) return (type(val) == "nil") end)
+assertNonNil     = templateAssert(function(val) return (type(val) ~= "nil") end)
 assertNumber     = templateAssert(function(val) return (type(val) == "number") end)
 assertString     = templateAssert(function(val) return (type(val) == "string") end)
 assertFunction   = templateAssert(function(val) return (type(val) == "function") end)
@@ -96,7 +149,15 @@ assertTable      = templateAssert(function(val) return (type(val) == "table") en
 assertTrue       = templateAssert(function(val) return val == true end)
 assertFalse      = templateAssert(function(val) return val == false end)
 assertEquals     = templateAssert(function(a,b) return a==b end)
+assertDifferent  = templateAssert(function(a,b) return a~=b end)
+--[[
+assertEquals     = templateAssert(function(a,b)
+    print("!" .. tostring(a) .. "!", "!" .. tostring(b) .. "!")
+    return a==b
+end)
+]]
 assertError      = templateAssert(function (f, ...) return not pcall(f, ...) end)
 assertListEquals = templateAssert(listEquals)
 assertListEmpty  = templateAssert(luno.table.isEmpty)
 
+assertStackErrorDepth = templateAssert(checkStackErrorDepth)

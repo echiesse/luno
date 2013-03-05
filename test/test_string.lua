@@ -1,7 +1,6 @@
 require"Test"
 require"luno.string"
 
-luno.string.useAlias()
 
 --##############################################################################
 -- Funções auxiliares:
@@ -11,6 +10,22 @@ luno.string.useAlias()
 -- Testes
 local cases =
 {
+    TestCase
+    (
+        "useAlias",
+        function()
+            -- Criar arquivo temporário:
+            luno.string.useAlias()
+            local res =
+            {
+                assertTable(lstring),
+                assertEquals(luno.string, lstring)
+            }
+            return allTrue(res)
+        end
+    ),
+
+
     TestCase
     (
         "chatAt",

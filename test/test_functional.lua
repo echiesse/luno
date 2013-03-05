@@ -1,4 +1,3 @@
-require"TestFunctions"
 require"Test"
 require"luno.functional"
 
@@ -175,6 +174,20 @@ local cases =
             }
 
             return allTrue(ret)
+        end
+    ),
+
+
+    TestCase
+    (
+        "map_typeMismatch",
+        function()
+            local res1 = assertStackErrorDepth(1, map, nil, {1,2,3})
+            print(_S.level)
+            --local res2 = map(double, nil)
+            --local res3 = map("", {1,2,3})
+
+            return allTrue{res1}
         end
     ),
 
