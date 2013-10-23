@@ -36,8 +36,12 @@ end
 
 --##############################################################################
 
+--------------------------------------------------------------------------------
+--  Recupera o conteúdo de um arquivo de texto
+--  @param fileName O nome do arquivo a ser recuperado.
+--------------------------------------------------------------------------------
 function luno.io.getTextFromFile(fileName)
-    local file, msg = io.open(fileName, "rt")
+    local file, msg = io.open(fileName, "r")
     local ret
     if file == nil then
         ret = {nil, msg}
@@ -49,8 +53,13 @@ function luno.io.getTextFromFile(fileName)
 end
 
 
+--------------------------------------------------------------------------------
+--  Salva um texto em arquivo.
+--  @param text     String com o texto a ser salvo.
+--  @param fileName O nome do arquivo a ser usado para salvar o texto.
+--------------------------------------------------------------------------------
 function luno.io.saveTextToFile(text, fileName)
-    local file = io.open(fileName, "wt")
+    local file = io.open(fileName, "w")
     file:write(text)
     file:close()
 end
