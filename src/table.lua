@@ -121,7 +121,7 @@ function luno.table.find(tb, value, test)
 
     for i, v in pairs(tb) do
         if test(v, value) then
-            table.insert(ret, {[i] = v})
+            table.insert(ret, {index = i, value = v})
         end
     end
     return ret
