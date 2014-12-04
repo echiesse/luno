@@ -34,6 +34,7 @@ luno.argReader.ARG_TYPE =
     KEY_VALUE  = 2,
 }
 
+local ARG_TYPE = luno.argReader.ARG_TYPE
 
 function luno.argReader.getArgTable(args, argMap)
     local ret = {}
@@ -57,6 +58,12 @@ function luno.argReader.getArgTable(args, argMap)
         end
 
         i, arg = next(args, i)
+    end
+
+    for arg, argType in pairs(argMap) do
+        if argType == ARG_TYPE.FLAG and ret[arg] == nil then
+            ret[arg] = false
+        end
     end
 
     return ret
