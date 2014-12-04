@@ -65,4 +65,16 @@ function luno.io.saveTextToFile(text, fileName)
 end
 
 
+--------------------------------------------------------------------------------
+--  Salva um texto em arquivo.
+--  @param text     String com o texto a ser salvo.
+--  @param fileName O nome do arquivo a ser usado para salvar o texto.
+--------------------------------------------------------------------------------
+function luno.io.appendTextToFile(text, fileName)
+    local file = io.open(fileName, "a")
+    file:write(text)
+    file:close()
+end
+
+
 return luno.io
