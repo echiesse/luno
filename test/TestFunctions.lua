@@ -12,6 +12,38 @@ function tableEquals(tb1, tb2)
     return ret
 end
 
+--[[
+function tableCorresponds(tb1, tb2)
+    local ret = true
+    for i, v in pairs(tb1) do
+        if tb2[i] ~= v then
+            if type(v) ~= "table" then
+                ret = false
+                break
+            else
+                ret = tableCorresponds(v, tb2[i])
+                if ret == false then break end
+            end
+        end
+    end
+    return ret
+end
+
+
+function anyElementLike(elem, list)
+    local ret = false
+    for i, v in ipairs(list) do
+        for j, u in pairs(elem)
+            if v[j] == u then
+                ret = true
+                break
+            end
+        end
+    end
+    return ret
+end
+]]
+
 
 function listEquals(l1, l2)
     local ret = true
@@ -158,6 +190,7 @@ end)
 ]]
 assertError      = templateAssert(function (f, ...) return not pcall(f, ...) end)
 assertListEquals = templateAssert(listEquals)
+--assertTableCorresponds = templateAssert(tableCorresponds)
 assertListEmpty  = templateAssert(luno.table.isEmpty)
 
 assertStackErrorDepth = templateAssert(checkStackErrorDepth)

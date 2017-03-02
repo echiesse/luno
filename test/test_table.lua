@@ -74,6 +74,35 @@ local cases =
 --function luno.table.isEmpty(tb)
 --function luno.table.last(tb)
 --function luno.table.find(tb, value, test)
+--[[
+    TestCase
+    (
+        "find",
+        function()
+            local t1 = {10,20,30,40,50,60}
+            local res1 = luno.table.find(t1, 30)
+            printDeep(res1)
+
+            local t2 = {a=10,b=20,c=10}
+            local res2 = luno.table.find(t2, 10)
+            printDeep(res2)
+
+            local t3 = {a=10,b=20,c=10,d=30}
+            local res3 = luno.table.find(t3, 15, function(value, vRef) return value > vRef end)
+            printDeep(res3)
+
+            local ret =
+            {
+                assertTableCorresponds(res1, {{index = 3, value = 30}}),
+                assertTableCorresponds(res2, {{index = "a", value = 10},{index = "c", value = 10}}),
+                assertTableCorresponds(res3, {{index = "b", value = 20},{index = "d", value = 30}}),
+            }
+
+            return allEquals(ret, true)
+        end
+    ),
+]]
+
     TestCase
     (
         "slice",

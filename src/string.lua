@@ -212,5 +212,20 @@ function luno.string.firstChar(str, pos)
 end
 
 
+function luno.string.padLeft(str, padChar, maxChars)
+    while #str < maxChars do
+        str = padChar .. str
+    end
+    return str
+end
+
+
+function luno.string.padRight(str, padChar, maxChars)
+    while #str < maxChars do
+        str = str .. padChar
+    end
+    return str
+end
+
 
 return luno.string

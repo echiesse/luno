@@ -2,7 +2,6 @@
 Luno is a bundle of general purpose libraries for Lua.
 The Luno project provides APIs to perform common tasks that facilitate the use of the Lua language.
 
-Luno means moon(Lua) in esperanto.
 
 ##Extensions to Lua standard library
 Luno conta com os módulos luno.string, luno.table e luno.io. Esses módulos provêem funções extras para manipular strings (trim, split, join, charAt, ...), io (getTextFromFile, ...), tabelas (imprimir tabelas, concatenar, ...).

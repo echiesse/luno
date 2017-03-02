@@ -15,8 +15,8 @@ The library comprises extended functions for dealing with strings, tables and io
 Luno offers a small framework for object oriented programming. It is possible do declare a class, define a contructor, methods and even use inheritance.
 
 Luno also provides support for functional programming. Functions like map, filter, reduce and many list operations are available. Also support for function composition and partial parameter application (sometimes refered to as currying) is implemented.
+]],
 
-Note: Luno means Lua (moon) in esperanto.]],
     homepage = "http://code.google.com/p/luno/",
     license = "MIT",
 }
