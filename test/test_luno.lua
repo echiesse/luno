@@ -36,11 +36,11 @@ end
 local results =
 {
     createAndRunTest("test_argReader",  "luno.argReader"),
-    --createAndRunTest("test_functional", "luno.functional"),
-    --createAndRunTest("test_string",     "luno.string"),
-    --createAndRunTest("test_table",      "luno.table"),
-    --createAndRunTest("test_io",         "luno.io"),
-    --createAndRunTest("test_util",       "luno.util"),
+    createAndRunTest("test_functional", "luno.functional"),
+    createAndRunTest("test_string",     "luno.string"),
+    createAndRunTest("test_table",      "luno.table"),
+    createAndRunTest("test_io",         "luno.io"),
+    createAndRunTest("test_util",       "luno.util"),
     --createAndRunTest("test_oop",        "luno.oop"),
 }
 
