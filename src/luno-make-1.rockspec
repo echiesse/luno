@@ -3,7 +3,8 @@ package = "Luno"
 version = "make-1"
 source =
 {
-    url = "http://...",
+    url = "git://github.com/echiesse/luno",
+    tag = ???
 }
 
 description =
@@ -17,7 +18,7 @@ Luno offers a small framework for object oriented programming. It is possible do
 Luno also provides support for functional programming. Functions like map, filter, reduce and many list operations are available. Also support for function composition and partial parameter application (sometimes refered to as currying) is implemented.
 ]],
 
-    homepage = "http://code.google.com/p/luno/",
+    homepage = "https://github.com/echiesse/luno",
     license = "MIT",
 }
 
