@@ -3,7 +3,7 @@ Luno is a bundle of general purpose libraries for Lua.
 The Luno project provides APIs to perform common tasks that facilitate the use of the Lua language.
 
 
-##Extensions to Lua standard library
+## Extensions to Lua standard library
 Luno conta com os módulos luno.string, luno.table e luno.io. Esses módulos provêem funções extras para manipular strings (trim, split, join, charAt, ...), io (getTextFromFile, ...), tabelas (imprimir tabelas, concatenar, ...).
 O módulo luno.util provê funções de uso geral como cópia (deep copy)  e impressão (deep print) de variáveis.
 
@@ -40,7 +40,7 @@ lio.saveTextToFile(newText, "newList.txt")
 
 A segunda versão do código é muito mais legível, podendo mesmo ser lido sem comentários de documentação. Além disso, evita problemas com arquivos não fechados e elimina o tempo, muitas vezes necessário, para ajustar corretamente o _pattern matching_ de strings. Por último, as linhas de código efetivo (eliminando os requires e configuração da lib) cai de 11 para 6 que é uma ganho que quase 2:1.
 
-##Functional Programming - luno.functional
+## Functional Programming - luno.functional
 O módulo luno.functional implementa as principais funções do paradigma funcional, como por exemplo: map, filter e reduce. Também há suporte para composição de funções e aplicação parcial de parâmetros. É possivel por exemplo fazer:
 
 ```lua
@@ -51,7 +51,7 @@ list = {1,2,3,4}
 res = F.map(soma2, list) -- res == {3,4,5,6}
 ```
 
-##Object Orientation - luno.oop
+## Object Orientation - luno.oop
 O módulo `luno.oop` implementa um pequeno framework (bem pequeno) para programação orientada a objetos que permite fazer coisas simples como:
 ```lua
 require "luno.oop"
@@ -65,5 +65,5 @@ a = A(1,2) -- instanciar um objeto.
 ```
 Herança também é prevista mudando um pouco a sintaxe.
 
-##Note
+## Note
 Please consider this project in experimental phase and relatively unstable. It is possible that some interfaces change in new versions though this does not happen frequently.
