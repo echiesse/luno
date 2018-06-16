@@ -4,7 +4,7 @@ version = "make-1"
 source =
 {
     url = "git://github.com/echiesse/luno",
-    tag = ???
+    tag = "???"
 }
 
 description =

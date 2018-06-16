@@ -123,6 +123,16 @@ end
 
 
 --------------------------------------------------------------------------------
+function luno.functional.zip(l1, l2)
+    local ret = {}
+    for i, v in ipairs(l1) do
+        ret[i] = {l1[i], l2[i]}
+    end
+    return ret
+end
+
+
+--------------------------------------------------------------------------------
 --  Verifica se algum elemento da lista satisfaz o predicado
 --  @param f Predicado a ser preenchido. Deve ser uma função que returna um booleano.
 --  @param list Lista a ser testada
@@ -242,6 +252,15 @@ function luno.functional.gfilter(f, list)
 end
 
 
+function luno.functional.fold(f, z, tb)
+    local ret = z
+    for k, elem in ipairs(tb) do
+        ret = f(elem, ret)
+    end
+    return ret
+end
+
+
 function luno.functional.reduce(f, list, iniVal)
     list = copy(list) -- Evitar efeitos colaterais no chamador
     if iniVal == nil then
@@ -265,6 +284,43 @@ end
 
 function luno.functional.flip(f, a, b)
     return f(b,a)
+end
+
+
+function luno.functional.takeWhile(test, list)
+    local ret = {}
+    for i, v in ipairs(list) do
+        if test(v) == false then
+            break
+        end
+        ret[i] = v
+    end
+    return ret
+end
+
+
+function luno.functional.dropWhile(test, list)
+    local ret = {}
+    local begin = 1
+    for j = 1, #list do
+        begin = j
+        if test(list[j]) == false then
+            break
+        end
+    end
+    for i = begin, #list do
+        table.insert(ret, list[i])
+    end
+    return ret
+end
+
+
+function luno.functional.zipWith(fn, l1, l2)
+    local ret = {}
+    for i, v in ipairs(l1) do
+        ret[i] = fn(l1[i], l2[i])
+    end
+    return ret
 end
 
 
