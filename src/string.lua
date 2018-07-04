@@ -42,28 +42,46 @@ end
 
 --##############################################################################
 
+--------------------------------------------------------------------------------
+-- Removes whitespace chars from the beginning (left) of a string.
+-- @param str The string to be trimmed
+-- @return The trimmed string
+--------------------------------------------------------------------------------
 function luno.string.ltrim(str)
-    return string.gsub(str, "^%s*", "")
+    -- [ECS]: Note to all trim functions: The parentheses around gsub below are
+    -- required to avoid returning the second return value of gsub which may
+    -- cause undesired side effects on the caller
+    return (string.gsub(str, "^%s*", ""))
 end
 
 
+--------------------------------------------------------------------------------
+-- Removes whitespace chars from the end (right) of a string.
+-- @param str The string to be trimmed
+-- @return The trimmed string
+--------------------------------------------------------------------------------
 function luno.string.rtrim(str)
-    return string.gsub(str, "%s*$", "")
+    return (string.gsub(str, "%s*$", ""))
 end
 
 
+--------------------------------------------------------------------------------
+-- Removes whitespace chars from the beginning (left) and the end (right) of a string.
+-- @param str The string to be trimmed
+-- @return The trimmed string
+--------------------------------------------------------------------------------
 function luno.string.trim(str)
     return luno.string.rtrim(luno.string.ltrim(str))
 end
 
 
 function luno.string.gltrim(str, pattern)
-    return string.gsub(str, "^" .. pattern, "")
+    return (string.gsub(str, "^" .. pattern, ""))
 end
 
 
 function luno.string.grtrim(str, pattern)
-    return string.gsub(str, pattern .. "$", "")
+    return (string.gsub(str, pattern .. "$", ""))
 end
 
 

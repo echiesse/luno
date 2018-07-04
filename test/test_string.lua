@@ -1,6 +1,5 @@
 require"Test"
-require"luno.string"
-
+lstring = dofile("../src/string.lua")
 
 --##############################################################################
 -- Funções auxiliares:
@@ -70,6 +69,15 @@ local cases =
 
     TestCase
     (
+        "trim returns single value",
+        function()
+            return assertEquals(#{lstring.trim(" ag  ua    ")}, 1)
+        end
+    ),
+
+
+    TestCase
+    (
         "ltrim",
         function()
             local res1 = lstring.ltrim("   agua")
@@ -87,6 +95,15 @@ local cases =
             }
 
             return allEquals(ret, true)
+        end
+    ),
+
+
+    TestCase
+    (
+        "ltrim returns single value",
+        function()
+            return assertEquals(#{lstring.ltrim(" ag  ua    ")}, 1)
         end
     ),
 
@@ -112,6 +129,16 @@ local cases =
             return allEquals(ret, true)
         end
     ),
+
+
+    TestCase
+    (
+        "rtrim returns single value",
+        function()
+            return assertEquals(#{lstring.rtrim(" ag  ua    ")}, 1)
+        end
+    ),
+
 
 --luno.string.gltrim(str, pattern)
 --luno.string.grtrim(str, pattern)
