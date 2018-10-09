@@ -35,7 +35,12 @@ end
 
 --##############################################################################
 
-function luno.table.append(t1, t2)
+--------------------------------------------------------------------------------
+--  Extends the first table with the elements of the second table returning a
+-- new table with the resulting elements in the order that they appear in the
+-- original tables
+--------------------------------------------------------------------------------
+function luno.table.extend(t1, t2)
     local ret = {}
 
     for _i, t in ipairs{t1,t2} do
@@ -47,17 +52,53 @@ function luno.table.append(t1, t2)
 end
 
 
----
+--------------------------------------------------------------------------------
+-- @deprecated Use luno.table.extend instead
+--------------------------------------------------------------------------------
+luno.table.append = luno.table.extend
+
+
+--------------------------------------------------------------------------------
+-- Returns a new table whose elements are the elements of the passed tables in
+-- the order that they appear in the original tables
+--------------------------------------------------------------------------------
+function luno.table.extendAll(...)
+    local tbs = {...}
+    if #tbs == 1 and type(tbs[1][1]) == "table" then
+        tbs = tbs[1]
+    end
+
+    local ret = {}
+    for _, tb in ipairs(tbs) do
+        for i, v in ipairs(tb) do
+            table.insert(ret, v)
+        end
+    end
+    return ret
+end
+
+
+--------------------------------------------------------------------------------
 --  Append com acumulador (t1 serve como acumulador)
---
-function luno.table.appendA(t1, t2)
+--------------------------------------------------------------------------------
+function luno.table.extendA(t1, t2)
     for i, v in ipairs(t2) do
         table.insert(t1, v)
     end
 end
 
 
+--------------------------------------------------------------------------------
+--  @deprecated Use luno.table.extendA instead
+--------------------------------------------------------------------------------
+luno.table.appendA = luno.table.extendA
+
+
 function luno.table.equals(tb1, tb2)
+    if tb1 == tb2 then
+        return true
+    end
+
     local ret = true
     for i, v in pairs(tb1) do
         if tb2[i] ~= v then
@@ -80,6 +121,10 @@ end
 
 
 function luno.table.iequals(l1, l2)
+    if l1 == l2 then
+        return true
+    end
+
     local ret = true
 
     if #l2 ~= #l1 then
